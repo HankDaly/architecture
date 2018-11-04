@@ -26,13 +26,18 @@ class Rectangle():
     """接受一个原点和三个对于原点的向量，顺序是逆时针"""
     #向量给的并不是其他的点的xy,而是与原点相减后的差值
     def __init__(self,x,y,dx1,dy1,dx2,dy2,dx3,dy3):
-        #矩形的原点默认为点类
+        #定义矩形的点类,一个原点和三个端点(逆时针)
         self.origin_point = Point(x,y)
-        #原点的象限在矩形生成的时候已经确定了
         self.origin_point.generatephase(dx1,dy1,dx3,dy3)
+        self.point1 = Point(x+dx1,y+dy1)
+        self.point1.generatephase(dx1,dy1,dx3,dy3)
+        self.point2 = Point(x+dx2,y+dy2)
+        self.point2.generatephase(dx1,dy1,dx3,dy3)
+        self.point3 = Point(x+dx3,y+dy3)
+        self.point3.generatephase(dx1,dy1,dx3,dy3)
         #定义矩形的三个向量
         self.vector1 = [dx1,dy1]
         self.vector2 = [dx2,dy2]
         self.vector3 = [dx3,dy3]
 
-    
+def 
