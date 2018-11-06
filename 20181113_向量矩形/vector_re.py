@@ -12,7 +12,7 @@ class Phase():
     #没有为相位添加原点,这意味着相位类不可脱离点类存在.
     def __init__(self,vectorx,vectory,vectorx_na,vectory_na):
         self.phase0 = [vectorx,vectory] #零象限包含的向量是x,y
-        self.phase1 = [vector_y,vectorx_na] #一象限包含的向量是y,-x
+        self.phase1 = [vectory,vectorx_na] #一象限包含的向量是y,-x
         self.phase2 = [vectorx_na,vectory_na] #二象限包含的向量是-x,-y
         self.phase4 = [vectory_na,vectorx] #三象限包含的向量是-y,x
 
@@ -77,34 +77,54 @@ def rayrayintersect(point1,vector1,point2,vector2):
     y1 = vector1.y
     x2 = vector2.x
     y2 = vector2.y
-    t2 = (c*y1-ay1-dx1+bx1)/(y2*x1-x2*y1)
+    t2 = (c*y1-a*y1-d*x1+b*x1)/(y2*x1-x2*y1)
     point = Point2D([c+x2*t2,d+y2*t2])
     return point
 
 #得到最小角度的向量
-def minanglevector(vectora,vector1,vector2,vectorb,vector3,vector4):
+def minanglevector(veca,vec1,vec2,vecb,vec3,vec4):
     #这里需要调用求向量长度的方法
-    vector1_len = vector1.len()
-    vector2_len = vector2.len()
-    vector3_len = vector3.len()
-    vector4_len = vector4.len()
-    k_2 = vector1_len/vector2_len
-    k_3 = vector1_len/vector3_len
-    k_4 = vector1_len/vector4_len
+    vec_list = [vec1,vec2,vec3,vec4]
+    vec1_len = vec1.len()
+    vec2_len = vec2.len()
+    vec3_len = vec3.len()
+    vec4_len = vec4.len()
+    k_2 = vec1_len/vec2_len
+    k_3 = vec1_len/vec3_len
+    k_4 = vec1_len/vec4_len
     #下面需要用到向量的点积算法
-    angle_a1 = vectora.vectorDot(vector1)
-    angle_a2 = k_2*vectora.vectorDot(vector2)
-    angle_b3 = k_3*vectorb.vectorDot(vector3)
-    angle_b4 = k_4*vectorb.vectorDot(vector4)
+    angle_a1 = veca.dot(vec1)
+    angle_a2 = k_2*veca.dot(vec2)
+    angle_b3 = k_3*vecb.dot(vec3)
+    angle_b4 = k_4*vecb.dot(vec4)
     #找到最小的角度以及对应的vector
     angle_list = [angle_a1,angle_a2,angle_b3,angle_b4]
     min_angle = angle_a1
     min_index = 0
+    min_index_other = 0
     for i in range(1,4):
         if angle_list[i] < min_angle:
             min_angle = angle_list[i]
             min_index = i
-
+    #下面需要用到向量的叉积算法
+    cross_a1 = veca.cross(vec1)
+    cross_a2 = veca.cross(vec2)
+    cross_b3 = vecb.cross(vec3)
+    cross_b4 = vecb.cross(vec4)
+    cross_list = [cross_a1,cross_a2,cross_b3,cross_b4]
+    #找到最小角度向量对应的另一边的向量
+    if i <= 1:
+        if cross_list[i] * cross_list[2] < 0:
+            min_index_other = 2
+        else:
+            min_index_other = 3
+    else:
+        if cross_list[i] * cross_list[0] < 0:
+            min_index_other = 0
+        else:
+            min_index_other = 1
+    
+        
 
 
     

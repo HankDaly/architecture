@@ -60,11 +60,11 @@ class Vector(object):
     def __init__(self, start_pt, end_pt):
         self.x = end_pt.x - start_pt.x
         self.y = end_pt.y - start_pt.y
-    def vectorDot(self, vec):
+    def dot(self, vec):
         # 向量的点积
         dot = self.x*vec.x+self.y*vec.y
         return dot
-    def vectorCross(self,vec):
+    def cross(self,vec):
         #向量的叉积
         cross = self.x*vec.y-self.y*vec.x
         return cross
