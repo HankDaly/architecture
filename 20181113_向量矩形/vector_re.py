@@ -82,7 +82,12 @@ def rayrayintersect(point1,vector1,point2,vector2):
     return point
 
 #得到最小角度的向量
-def minanglevector(veca,vec1,vec2,vecb,vec3,vec4):
+def minanglevector(phase1,phase2,veca,vecb):
+    #获取各个象限的向量
+    vec1 = phase1.start_vec
+    vec2 = phase1.end_vec
+    vec3 = phase2.start_vec
+    vec4 = phase2.end_vec
     #这里需要调用求向量长度的方法
     vec_list = [vec1,vec2,vec3,vec4]
     vec1_len = vec1.len()
@@ -123,7 +128,12 @@ def minanglevector(veca,vec1,vec2,vecb,vec3,vec4):
             min_index_other = 0
         else:
             min_index_other = 1
-    
+    #最后按照phase1，phase2的顺序输出向量
+    if min_index > min_index_other:
+        return vec_list[min_index_other],vec_list[min_index]
+    else:
+        return vec_list[min_index],vec_list[min_index_other]
+        
         
 
 
