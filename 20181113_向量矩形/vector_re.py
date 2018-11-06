@@ -69,14 +69,14 @@ def iffolder(vectora,vectorb,vectorc):
             return 0
 #分别给定两条射线的起始点与向量,得到交点,注意输入的不能是平行或共线的射线
 def rayrayintersect(point1,vector1,point2,vector2):
-    a = point1[0]
-    b = point1[1]
-    c = point2[0]
-    d = point2[1]
-    x1 = vector1[0]
-    y1 = vector1[1]
-    x2 = vector2[0]
-    y2 = vector2[1]
+    a = point1.x
+    b = point1.y
+    c = point2.x
+    d = point2.y
+    x1 = vector1.x
+    y1 = vector1.y
+    x2 = vector2.x
+    y2 = vector2.y
     t2 = (c*y1-ay1-dx1+bx1)/(y2*x1-x2*y1)
     point = Point2D([c+x2*t2,d+y2*t2])
     return point
@@ -92,10 +92,10 @@ def minanglevector(vectora,vector1,vector2,vectorb,vector3,vector4):
     k_3 = vector1_len/vector3_len
     k_4 = vector1_len/vector4_len
     #下面需要用到向量的点积算法
-    angle_a1 = vectora.dot_product(vector1)
-    angle_a2 = k_2*vectora.dot_product(vector2)
-    angle_b3 = k_3*vectorb.dot_product(vector3)
-    angle_b4 = k_4*vectorb.dot_product(vector4)
+    angle_a1 = vectora.vectorDot(vector1)
+    angle_a2 = k_2*vectora.vectorDot(vector2)
+    angle_b3 = k_3*vectorb.vectorDot(vector3)
+    angle_b4 = k_4*vectorb.vectorDot(vector4)
     #找到最小的角度以及对应的vector
     angle_list = [angle_a1,angle_a2,angle_b3,angle_b4]
     min_angle = angle_a1
