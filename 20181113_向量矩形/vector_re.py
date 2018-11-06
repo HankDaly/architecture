@@ -46,6 +46,7 @@ class Rectangle():
         self.vector2 = [dx2,dy2]
         self.vector3 = [dx3,dy3]
 
+
 #给定三个向量，判断第一个是否被后两个相夹
 def iffolder(vectora,vectorb,vectorc):
     """返回1就是相夹,0就是不相夹,2就是共线"""
